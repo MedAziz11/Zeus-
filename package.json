@@ -1,0 +1,12 @@
+{
+    "name": "zeus",
+    "version": "1.0.0",
+    "description": "Music Downloader and Lyrics Generator",
+    "main": "main.js",
+    "author": "MedAziz11",
+    "license": "MIT",
+    "scripts": {
+      "start": "electron ."
+    }
+
+}
