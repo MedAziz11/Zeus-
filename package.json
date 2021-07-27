@@ -9,7 +9,7 @@
         "start": "electron ."
     },
     "dependencies": {
-        "lyrics-monarch-api": "^2.1.0"
+        "lyrics-finder": "^21.7.0"
     },
     "devDependencies": {
         "electron": "^13.1.7"
