@@ -1,0 +1,216 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+:root{
+    --bg:#F5CAC3;
+    --bg-btn:#84A59D;
+    --text-big:#1b263b;
+    --font-color-btn:white;    
+    --main-font:'Source Sans Pro', sans-serif;
+}
+
+.dark{
+    --bg:#1b263b;
+    --text-big:white;
+    --bg-btn:#F6BD60;
+    --font-color-btn:#1b263b;
+}
+
+body{
+    font-family: var(--main-font);
+    height: 100vh;
+    background-color: var(--bg);
+}
+
+.main-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 6em;
+    transition: all 0.5s;
+}
+
+.logo{
+    padding: 1em 0;
+}
+
+.logo span{
+    font-size: 0.6em;
+    position: relative;
+    top: -0.2em;
+}
+
+.logo h1{
+    font-size: 5em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: var(--text-big);
+}
+
+.input-link input{
+    padding: 1em;
+    width: 100%;
+    border: none;
+    border-radius: 2em;
+    text-indent: 1.5em;
+}
+
+::placeholder{
+    font-family: var(--main-font);
+    font-size: 1em;
+    color: rgb(182, 182, 182);
+    letter-spacing: .15em;
+}
+
+.btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.8em 0;
+    gap: 1em;
+}
+
+.btn{
+    padding: 1em;
+    background-color: var(--bg-btn);
+    border: none;
+    width: 100%;
+    border-radius: 2em;
+    text-transform: uppercase;
+    color: var(--font-color-btn);
+    font-weight: 700;
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover{
+    color: black;
+    background-color: white;
+}
+
+.work-container{
+    width: 35%;
+}
+
+.song-content{
+    padding: 0em 1em 5em 1em;
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    transform: translate(65%,-50%);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.song-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.song-img{
+    width: 40%;
+}
+
+.name h1{
+    text-transform: capitalize;
+    font-size: 1.5em;
+    color: var(--text-big);
+}
+
+.lyrics{
+    padding-top: 1em;
+    color: var(--text-big);
+}
+
+.lyrics h2{
+    font-weight: 400;
+    text-transform: uppercase;
+    padding-bottom: 1em;
+}
+
+.toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle p{
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--text-big);
+    text-transform: uppercase;
+    flex: 1;
+    text-align: right;
+    padding-right: 1em;
+}
+
+/* The switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+  
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16.2px;
+    width: 16px;
+    left: 4px;
+    bottom: 2px;
+    background-color: #1b263b;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: var(--text-big);
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(17px);
+    -ms-transform: translateX(17px);
+    transform: translateX(17px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+/*end slider*/

@@ -6,7 +6,12 @@
     "author": "MedAziz11",
     "license": "MIT",
     "scripts": {
-      "start": "electron ."
+        "start": "electron ."
+    },
+    "dependencies": {
+        "lyrics-monarch-api": "^2.1.0"
+    },
+    "devDependencies": {
+        "electron": "^13.1.7"
     }
-
 }
