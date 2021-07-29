@@ -9,6 +9,7 @@
         "start": "electron ."
     },
     "dependencies": {
+        "@allvaa/get-lyrics": "^1.1.4",
         "lyrics-finder": "^21.7.0"
     },
     "devDependencies": {

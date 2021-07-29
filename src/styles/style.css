@@ -144,6 +144,9 @@ body{
     text-transform: uppercase;
     padding-bottom: 1em;
 }
+.lyrics p {
+    overflow: scroll;
+}
 
 .toggle{
     display: flex;
