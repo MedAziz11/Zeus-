@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 
 const lyricsFinder = require("lyrics-finder");
+const song = require("@allvaa/get-lyrics");
 
 let mainWindow;
 
@@ -49,11 +50,21 @@ async function getLyrics(artist, title) {
   return lyrics;
 };
 
+async function searchSong (title)  {
+  let result = await song(title) ;
+
+  if (result.lyrics == ""){
+      result["lyrics"] = await getLyrics("", title);
+  }
+
+  return result
+}
+
 //the connection between the main process and renderer process
 ipcMain.on("song_name",async (event, data) => {
-    let lyrics = await getLyrics("", data);
-    lyrics = lyrics.split(/(?=[A-Z])/);
-    event.sender.send("lyrics", lyrics.join(" <br> "))
+    let song = await searchSong(data);
+
+    event.sender.send("song_obj", song)
     //taking shape jaden bojsen
   
 }); 

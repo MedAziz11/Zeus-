@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <title>Zeus⚡ | Lyrics Generator | Music Downloader </title>
 
@@ -10,63 +11,74 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap"
         rel="stylesheet">
-  </head>
-  <body>
-    <a href="#!" class="close" id="exit"></a>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <p>Zeus ⚡ | Lyrics Generator | Music Downloader</p>
+
+        <a href="#!" class="close" id="exit"></a>
+        <a href="#!" class="reduce" id="reduce"></a>
+
+    </div>
     <div class="main-container">
-      <div class="logo">
-        <h1>zeus <span>⚡</span></h1>
-      </div>
-      <div class="work-container">
-        <div class="input-link">
-          <input type="text" placeholder="Enter the song URL" id="song" />
+        <div class="logo">
+            <h1>zeus <span>⚡</span></h1>
         </div>
-        <div class="btns">
-          <button class="btn btn-generate" id="generate" >generate lyrics</button>
+        <div class="work-container">
+            <div class="input-link">
+                <input type="text" placeholder="Enter the song URL" id="song" />
+                <p class="err hidden">Please enter a valid Youtube URL 😁</p>
+            </div>
+            <div class="btns">
+                <button class="btn btn-generate" id="generate">generate lyrics</button>
 
-          <button class="btn btn-download" id="download">download</button>
+                <button class="btn btn-download" id="download">download</button>
+            </div>
         </div>
-      </div>
 
-      <div class="toggle">
-        <p>Dark Mode</p>
-        <label class="switch">
-          <input type="checkbox" id="tog" />
-          <span class="slider round"></span>
-        </label>
-      </div>
+        <div class="toggle">
+            <p>Dark Mode</p>
+            <label class="switch">
+                <input type="checkbox" id="tog" />
+                <span class="slider round"></span>
+            </label>
+        </div>
     </div>
 
     <div class="song-content">
-      <div class="song-name">
-        <div class="name">
-          <h1>
-            princess chelsea <br />
-            the cigarette duet
-          </h1>
+        <div class="song-name">
+            <div class="name">
+                <h1 id ="title"></h1>
+            </div>
+            <div class="song-img">
+                <img id="song-img" />
+            </div>
         </div>
-        <div class="song-img">
-          <img src="images/1.jpg" alt="" />
-        </div>
-      </div>
 
-      <div class="lyrics">
-        <h2>lyrics</h2>
-        <div></div>
-        <p id="lyrics-text">
-        </p>
-      </div>
+        <div class="lyrics">
+            <h2>lyrics</h2>
+            <!-- <p id="lyrics-text" class="inner-lyrics"> -->
+            
+            <div class="lyrics-bg">
+                <div class="scroll-lyrics">
+                    <div class="lyrics-content">
+                        <p id="lyrics-text">
+                            <div class="loader"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            </p>
+        </div>
     </div>
 
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="js/script.js"></script>
     <script src="js/renderer.js"></script>
-  </body>
+</body>
+
 </html>
