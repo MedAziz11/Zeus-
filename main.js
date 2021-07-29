@@ -1,4 +1,6 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+
+const lyricsFinder = require("lyrics-finder");
 
 let mainWindow;
 
@@ -7,8 +9,12 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 970,
     height: 800,
+    resizable:false,
+    frame:false,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule:true,
     },
   });
 
@@ -21,26 +27,34 @@ function createWindow() {
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+
 app.on("ready", createWindow);
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
 app.on("activate", function () {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow();
   }
 });
 
+//get lyrics functionality
+async function getLyrics(artist, title) {
+  let lyrics = await lyricsFinder(artist, title) || "Not Found!";
+  return lyrics;
+};
+
+//the connection between the main process and renderer process
+ipcMain.on("song_name",async (event, data) => {
+    let lyrics = await getLyrics("", data);
+    lyrics = lyrics.split(/(?=[A-Z])/);
+    event.sender.send("lyrics", lyrics.join(" <br> "))
+    //taking shape jaden bojsen
+  
+}); 
 
