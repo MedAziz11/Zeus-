@@ -3,11 +3,6 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const lyricsFinder = require("lyrics-finder");
 const song = require("@allvaa/get-lyrics");
 
-const fs = require("fs-extra"),
-  youtube = require("ytdl-core"),
-  ffmpeg = require("fluent-ffmpeg"),
-  ID3 = require("node-id3")
-
 let mainWindow;
 
 function createWindow() {
