@@ -3,6 +3,11 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const lyricsFinder = require("lyrics-finder");
 const song = require("@allvaa/get-lyrics");
 
+const fs = require("fs-extra"),
+  youtube = require("ytdl-core"),
+  ffmpeg = require("fluent-ffmpeg"),
+  ID3 = require("node-id3")
+
 let mainWindow;
 
 function createWindow() {
@@ -13,7 +18,7 @@ function createWindow() {
     // resizable: false,
     minHeight: 783,
     minWidth: 807,
-    maxHeight:900,
+    maxHeight: 900,
     maxWidth: 1316,
     frame: false,
     webPreferences: {
@@ -63,14 +68,13 @@ async function searchSong(title) {
 
   if (result == undefined) return failed;
 
-
   if (result.lyrics == "") {
     result["lyrics"] = await getLyrics("", result.title);
-  }{
-    result['lyrics'] = result.lyrics.replace(/\n/g, "<br>");
+  }
+  {
+    result["lyrics"] = result.lyrics.replace(/\n/g, "<br>");
   }
 
-  
   return result;
 }
 
@@ -78,5 +82,8 @@ async function searchSong(title) {
 ipcMain.on("song_name", async (event, data) => {
   let song = await searchSong(data);
   event.sender.send("song_obj", song);
-
 });
+
+ipcMain.on("song_id", async (event, data) => {
+  console.log(data);  
+})
