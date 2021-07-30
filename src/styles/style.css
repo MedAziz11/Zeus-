@@ -157,6 +157,7 @@ img[src=""] {
 .lyrics-bg{
     /* display: none; */
     overflow: auto;
+    width:100%;
 }
 
 .scroll-lyrics{
@@ -165,6 +166,15 @@ img[src=""] {
     overflow: hidden;
     overflow-y: auto;
     /* padding: 1em; */
+}
+
+.lyrics-content{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0em 2em;
 }
 
 .lyrics-content p{
@@ -336,10 +346,10 @@ input:checked + .slider:before {
     width: 30px;
     height: 30px;
     animation: spin .8s linear infinite;
-    /* right: -1em; */
     position: relative;
     /* display: none; */
   }
+  
   
   @keyframes spin {
     0% { transform: rotate(0deg); }

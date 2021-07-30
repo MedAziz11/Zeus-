@@ -75,7 +75,7 @@ urlInput.addEventListener('focus', () => {
         isClicked = 0;
         document.getElementById('lyrics-text').innerHTML = '';
         document.getElementById('title').innerHTML = '';
-        // document.getElementById('song-img').removeAttribute('src');
+
         document.getElementById('song-img').src = ""
 
         document.querySelector('.loader').classList.remove('hidden');

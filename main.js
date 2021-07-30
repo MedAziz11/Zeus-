@@ -10,12 +10,16 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 970,
     height: 800,
-    resizable:false,
-    frame:false,
+    // resizable: false,
+    minHeight: 783,
+    minWidth: 807,
+    maxHeight:900,
+    maxWidth: 1316,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      enableRemoteModule:true,
+      enableRemoteModule: true,
     },
   });
 
@@ -27,7 +31,6 @@ function createWindow() {
     mainWindow = null;
   });
 }
-
 
 app.on("ready", createWindow);
 
@@ -46,26 +49,34 @@ app.on("activate", function () {
 
 //get lyrics functionality
 async function getLyrics(artist, title) {
-  let lyrics = await lyricsFinder(artist, title) || "Not Found!";
+  let lyrics = (await lyricsFinder(artist, title)) || "Not Found!";
   return lyrics;
-};
+}
 
-async function searchSong (title)  {
-  let result = await song(title) ;
+async function searchSong(title) {
+  let failed = {
+    title: "",
+    image: "",
+    lyrics: "Not Found !! ",
+  };
+  let result = await song(title);
 
-  if (result.lyrics == ""){
-      result["lyrics"] = await getLyrics("", title);
+  if (result == undefined) return failed;
+
+
+  if (result.lyrics == "") {
+    result["lyrics"] = await getLyrics("", result.title);
+  }{
+    result['lyrics'] = result.lyrics.replace(/\n/g, "<br>");
   }
 
-  return result
+  
+  return result;
 }
 
 //the connection between the main process and renderer process
-ipcMain.on("song_name",async (event, data) => {
-    let song = await searchSong(data);
+ipcMain.on("song_name", async (event, data) => {
+  let song = await searchSong(data);
+  event.sender.send("song_obj", song);
 
-    event.sender.send("song_obj", song)
-    //taking shape jaden bojsen
-  
-}); 
-
+});
