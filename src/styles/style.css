@@ -138,8 +138,10 @@ img[src=""] {
  }
 
 .song-img{
-    width: 40%;
+    width: 30%;
 }
+
+
 
 .name h1{
     text-transform: capitalize;
@@ -164,7 +166,7 @@ img[src=""] {
 
 .scroll-lyrics{
     background-color: transparent;
-    height: 400px;
+    height: 22em;
     overflow: hidden;
     overflow-y: auto;
     /* padding: 1em; */

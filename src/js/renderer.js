@@ -19,7 +19,7 @@ document.getElementById("generate").addEventListener("click", function () {
 
   document.querySelector(".no-result").classList.add("hidden");
   document.querySelector(".no-result-msg").classList.add("hidden");
-  
+
   ipcRenderer.on("song_obj", async (event, data) => {
     let song = await data;
     let lyrics = song.lyrics.split(",");
@@ -69,7 +69,22 @@ downloadbtn.addEventListener("click", () => {
     if (ampersandPosition != -1) {
       video_id = video_id.substring(0, ampersandPosition);
     }
-    console.log(video_id);
+
     ipcRenderer.send("song_id", video_id);
   }
+
+  ipcRenderer.on("progress", async (event, data) => {
+    console.log(await data);
+})
+
+    ipcRenderer.on("finished", (event, data) => {
+        console.log(data);
+    })
+
+
+
+    ipcRenderer.on("error", (event, data) => {
+        console.log(data);
+    })
+
 });

@@ -3,6 +3,9 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const lyricsFinder = require("lyrics-finder");
 const song = require("@allvaa/get-lyrics");
 
+const YoutubeMp3Downloader = require("youtube-mp3-downloader");
+const ffmpegPath = require("ffmpeg-static-binaries-electron");
+
 let mainWindow;
 
 function createWindow() {
@@ -11,7 +14,7 @@ function createWindow() {
     width: 970,
     height: 800,
     // resizable: false,
-    minHeight: 783,
+    minHeight: 700,
     minWidth: 807,
     maxHeight: 900,
     maxWidth: 1316,
@@ -24,7 +27,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("src/index.html");
+  mainWindow.loadURL(`file://${__dirname}/src/index.html`);
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -79,6 +82,37 @@ ipcMain.on("song_name", async (event, data) => {
   event.sender.send("song_obj", song);
 });
 
+//Youtube downloader
+
+let YD = new YoutubeMp3Downloader({
+  ffmpegPath: ffmpegPath, // FFmpeg binary location
+  outputPath: ".", // Output file location (default: the home directory)
+  youtubeVideoQuality: "highestaudio", // Desired video quality (default: highestaudio)
+  queueParallelism: 2, // Download parallelism (default: 1)
+  progressTimeout: 2000, // Interval in ms for the progress reports (default: 1000)
+  allowWebm: false, // Enable download from WebM sources (default: false)
+});
+
+
+
+
 ipcMain.on("song_id", async (event, data) => {
-  console.log(data);  
-})
+  YD.download(data);
+
+
+  YD.on("progress", async function (progress) {
+    console.log(JSON.stringify(progress));
+    event.sender.send("progress", JSON.stringify(progress));
+  });
+
+
+  YD.on("error", async function (error) {
+    event.sender.send("error",error);
+  });
+  
+  YD.on("finished", async function (err, data) {
+    event.sender.send("finished", JSON.stringify(data));
+  });
+
+
+});
