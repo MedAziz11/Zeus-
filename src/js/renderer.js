@@ -1,6 +1,8 @@
 const remote = require("electron").remote;
 const { ipcRenderer } = require("electron");
 
+const { dialog } = require("electron").remote;
+
 // close the app functionality
 document.getElementById("exit").addEventListener("click", function () {
   let window = remote.getCurrentWindow();
@@ -29,7 +31,6 @@ document.getElementById("generate").addEventListener("click", function () {
       document.getElementById("title").innerHTML =
         array[0] + "<br>" + array[1].slice(1);
       document.getElementById("lyrics-text").innerHTML = lyrics.join("<br/>");
- 
     } else {
       document.querySelector(".no-result").classList.remove("hidden");
       document.querySelector(".no-result-msg").classList.remove("hidden");
@@ -57,34 +58,44 @@ downloadbtn.addEventListener("click", () => {
     errMsg.classList.remove("hidden");
     btnsContainer.style.padding = "1.2em 0";
     return;
-  } else {
-    errMsg.classList.add("hidden");
-    btnsContainer.style.padding = "1.8em 0";
-    let url = document.getElementById("song").value;
-
-    let video_id = url.split("v=")[1];
-
-    let ampersandPosition = video_id.indexOf("&");
-
-    if (ampersandPosition != -1) {
-      video_id = video_id.substring(0, ampersandPosition);
-    }
-
-    ipcRenderer.send("song_id", video_id);
   }
 
-  ipcRenderer.on("progress", async (event, data) => {
-    console.log(await data);
-})
+  errMsg.classList.add("hidden");
+  btnsContainer.style.padding = "1.8em 0";
+  let url = document.getElementById("song").value;
 
-    ipcRenderer.on("finished", (event, data) => {
-        console.log(data);
+  let video_id = url.split("v=")[1];
+
+  let ampersandPosition = video_id.indexOf("&");
+
+  if (ampersandPosition != -1) {
+    video_id = video_id.substring(0, ampersandPosition);
+  }
+
+  let path = dialog.showOpenDialog({
+    properties: ["openDirectory"],
+  });
+  path
+    .then((result) => {
+      if (!result.canceled) {
+        let location = result.filePaths[0];
+        console.log(location);
+        ipcRenderer.send("song_id", { video_id, location });
+
+        ipcRenderer.on("finished", (event, data) => {
+          console.log(data);
+        });
+
+        // ipcRenderer.on("progress", async (event, data) => {
+        //   console.log(data);
+        // });
+        
+        ipcRenderer.on("error", (event, data) => {
+          console.log(data);
+        });
+      }
     })
-
-
-
-    ipcRenderer.on("error", (event, data) => {
-        console.log(data);
-    })
-
+    .catch((err) => {
+      console.log(err);
+    });
 });

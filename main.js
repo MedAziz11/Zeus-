@@ -82,37 +82,29 @@ ipcMain.on("song_name", async (event, data) => {
   event.sender.send("song_obj", song);
 });
 
-//Youtube downloader
-
-let YD = new YoutubeMp3Downloader({
-  ffmpegPath: ffmpegPath, // FFmpeg binary location
-  outputPath: ".", // Output file location (default: the home directory)
-  youtubeVideoQuality: "highestaudio", // Desired video quality (default: highestaudio)
-  queueParallelism: 2, // Download parallelism (default: 1)
-  progressTimeout: 2000, // Interval in ms for the progress reports (default: 1000)
-  allowWebm: false, // Enable download from WebM sources (default: false)
-});
-
-
-
-
 ipcMain.on("song_id", async (event, data) => {
-  YD.download(data);
+  //Youtube downloader
 
-
-  YD.on("progress", async function (progress) {
-    console.log(JSON.stringify(progress));
-    event.sender.send("progress", JSON.stringify(progress));
+  let YD = new YoutubeMp3Downloader({
+    ffmpegPath: ffmpegPath, // FFmpeg binary location
+    outputPath: data.location, // Output file location (default: the home directory)
+    youtubeVideoQuality: "highestaudio", // Desired video quality (default: highestaudio)
+    queueParallelism: 2, // Download parallelism (default: 1)
+    progressTimeout: 2000, // Interval in ms for the progress reports (default: 1000)
+    allowWebm: false, // Enable download from WebM sources (default: false)
   });
 
+  YD.download(data.video_id);
+
+  YD.on("progress", async (progress) => {
+    event.sender.send("progress", progress);
+  });
 
   YD.on("error", async function (error) {
-    event.sender.send("error",error);
+    event.sender.send("error", error);
   });
-  
+
   YD.on("finished", async function (err, data) {
     event.sender.send("finished", JSON.stringify(data));
   });
-
-
 });
