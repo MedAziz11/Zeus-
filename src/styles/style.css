@@ -43,6 +43,7 @@ body{
     flex-direction: column;
     padding-top: 6em;
     transition: all 0.5s;
+    /* transform: translate(0 , -15%) scale(0.75); */
 }
 
 .logo{
@@ -115,7 +116,7 @@ body{
     /* align-items: center;
     justify-content: center; */
     width: 55%;
-    transform: translate(65%,-40%);
+    transform: translate(65%,-75%);
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.5s linear;
@@ -352,6 +353,19 @@ input:checked + .slider:before {
     animation: spin .8s linear infinite;
     position: relative;
     /* display: none; */
+  
+  }
+
+  .loader-url {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid var(--loader); /* #3498db Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin .8s linear infinite;
+    position: relative;
+    /* display: none; */
+    margin: auto;
   }
   
   
@@ -406,3 +420,71 @@ input:checked + .slider:before {
     width: 100%;
     height: 100%;
 }
+
+
+
+/* Download BTN  */
+
+.download-container{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    transform: translate(0,-20%);
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+
+}
+
+.download-info{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    color: var(--text-big);
+    padding-bottom: 1em;
+    /* padding-top: 4.5em; */
+}
+
+.download-btns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    gap: 2em;
+    flex-direction: column;
+}
+
+.png{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: var(--nores-img);
+}
+
+.test-btn{
+    width: 100%;
+}
+
+.down-img img , .tick-img img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.down-img , .tick-img{
+    width: 15%;
+    overflow: hidden;
+}
+
+.down-img img{
+    animation: spino 1s linear infinite;
+}
+
+@keyframes spino {
+    0% { transform: translate(0,-200%); }
+    100% { transform: translate(0,110%); }
+}
+

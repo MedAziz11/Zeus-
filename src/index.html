@@ -27,7 +27,7 @@
         </div>
         <div class="work-container">
             <div class="input-link">
-                <input type="text" placeholder="Enter the song URL" id="song" />
+                <input type="text" placeholder="Enter the song Youtube URL" id="song" />
                 <p class="err hidden">Please enter a valid Youtube URL 😁</p>
             </div>
             <div class="btns">
@@ -46,6 +46,29 @@
         </div>
     </div>
 
+    <div class="download-container">
+        <div class="download-info">
+            <div class="loader-url"></div>
+            <h1 id="url-title"></h1>
+            <h3 id="url-duration"></h3>
+            <p id="file-ready">The file is ready. Please click the confirm download button to start the download.</p>
+        </div>
+        <div class="download-btns">
+            <button class="btn test-btn" id="confirm">confirm download</button>
+            <div class="png">
+                <div class="tick-img">
+                    <img src="./images/tick.png" alt="tick">
+                </div>
+                <div class="down-img">
+                    <img src="./images/down-arrow.png" alt="down">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
     <div class="song-content">
         <div class="song-name">
             <div class="name">
@@ -55,6 +78,8 @@
                 <img id="song-img" />
             </div>
         </div>
+
+        
 
         <div class="lyrics">
             <h2>lyrics</h2>
@@ -78,6 +103,9 @@
             </p>
         </div>
     </div>
+
+    
+
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

@@ -13,6 +13,9 @@ const btnsContainer = document.querySelector(".btns");
 
 const errorContentMsg = document.querySelector(".no-result-msg");
 
+
+
+
 let isClicked = 0;
 
 btnGenerate.addEventListener("click", () => {
@@ -43,3 +46,26 @@ urlInput.addEventListener("focus", () => {
 btnDark.addEventListener("change", () => {
   document.body.classList.toggle("dark");
 });
+
+
+let isClickedDown = 0;
+
+urlInput.addEventListener('focus', () => {
+  if (isClickedDown === 1) {
+    console.log('test');
+    console.log(isClickedDown);
+    mainContainer.style.transform = "";
+    downloadContainer.style.visibility = "hidden";
+    downloadContainer.style.opacity = 0;
+    isClickedDown = 0;
+    
+  document.getElementById("generate").classList.remove("hidden");
+
+  document.querySelector(".loader-url").classList.remove("hidden");
+
+  document.getElementById("url-title").innerHTML = "";
+  document.getElementById("url-duration").innerHTML = "";
+
+
+  }
+})

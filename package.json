@@ -12,7 +12,8 @@
         "@allvaa/get-lyrics": "^1.1.4",
         "ffmpeg-static-binaries-electron": "^1.0.1",
         "lyrics-finder": "^21.7.0",
-        "youtube-mp3-downloader": "^0.7.7"
+        "youtube-mp3-downloader": "^0.7.7",
+        "ytdl-core": "^4.9.0"
     },
     "devDependencies": {
         "electron": "^13.1.7"
