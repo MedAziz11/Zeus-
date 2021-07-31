@@ -1,4 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Notification } = require("electron");
+const path = require("path");
 
 const lyricsFinder = require("lyrics-finder");
 const song = require("@allvaa/get-lyrics");
@@ -11,6 +12,8 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    title: "Zeus ⚡",
+    icon: path.join(__dirname, "src/images/icon.png"),
     width: 970,
     height: 800,
     // resizable: false,
@@ -27,7 +30,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/src/index.html`);
+  mainWindow.loadURL(path.join(__dirname, "src/index.html"));
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -35,7 +38,16 @@ function createWindow() {
   });
 }
 
-app.on("ready", createWindow);
+function showNotification(title, body) {
+  new Notification({
+    title,
+    body,
+  }).show();
+}
+
+app.setAppUserModelId("Zeus ⚡");
+
+app.whenReady().then(createWindow);
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {
@@ -48,6 +60,10 @@ app.on("activate", function () {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+app.on("before-quit", () => {
+  clearInterval(progressInterval);
 });
 
 //get lyrics functionality
@@ -96,6 +112,24 @@ ipcMain.on("song_id", async (event, data) => {
 
   YD.download(data.video_id);
 
+  const INCREMENT = 0.1;
+  const INTERVAL_DELAY = 1; // ms
+
+  let c = 0;
+  let isCompleted = false;
+  progressInterval = setInterval(() => {
+    mainWindow.setProgressBar(c);
+    
+      c += INCREMENT;
+      if (isCompleted) c=-1;
+    
+  }, INTERVAL_DELAY);
+
+  
+  if (isCompleted){
+    clearInterval(progressInterval);
+  }
+
   YD.on("progress", async (progress) => {
     event.sender.send("progress", progress);
   });
@@ -106,5 +140,10 @@ ipcMain.on("song_id", async (event, data) => {
 
   YD.on("finished", async function (err, data) {
     event.sender.send("finished", JSON.stringify(data));
+    isCompleted = true;
+    const NOTIFICATION_TITLE = "Download Done Successfully !! ";
+    const NOTIFICATION_BODY = ` ${data.videoTitle} downloaded`;
+
+    showNotification(NOTIFICATION_TITLE, NOTIFICATION_BODY);
   });
 });
