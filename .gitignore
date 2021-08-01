@@ -5,7 +5,9 @@
 
 
 *.mp3
+electron-builder.yml
 
+dist
 ### Node ###
 # Logs
 logs

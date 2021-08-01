@@ -3,19 +3,30 @@
     "version": "1.0.0",
     "description": "Music Downloader and Lyrics Generator",
     "main": "main.js",
-    "author": "MedAziz11",
+    "author": "MedAziz11 & DaoudAnas13",
     "license": "MIT",
     "scripts": {
         "start": "electron ."
     },
+
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/MedAziz11/Zeus-.git"
+    },
+
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always",
+
     "dependencies": {
         "@allvaa/get-lyrics": "^1.1.4",
+        "electron-updater": "^4.3.9",
         "ffmpeg-static-binaries-electron": "^1.0.1",
         "lyrics-finder": "^21.7.0",
         "youtube-mp3-downloader": "^0.7.7",
         "ytdl-core": "^4.9.0"
     },
     "devDependencies": {
-        "electron": "^13.1.7"
+        "electron": "^13.1.7",
+        "electron-builder": "^22.11.7"
     }
 }
