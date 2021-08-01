@@ -13,3 +13,11 @@
 ### Screenshots:
 ![main screen light mode](product/view1.png?raw=true "main screen light mode")
 
+![main screen dark mode](product/view2.png?raw=true "main screen dark mode")
+
+![lyrics](product/view3.png?raw=true "lyrics")
+
+![downloader](product/view4.png?raw=true "downloader")
+
+![notification](product/view5.png?raw=true "notification")
+
