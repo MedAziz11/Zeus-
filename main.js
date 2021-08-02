@@ -121,18 +121,19 @@ ipcMain.on("song_id", async (event, data) => {
   let isCompleted = false;
   let c = 0;
   progressInterval = setInterval(() => {
-    
-    mainWindow.setProgressBar(c);
+    try{
+
+      mainWindow.setProgressBar(c);
+      if (isCompleted) mainWindow.setProgressBar(-1);
     
       c += INCREMENT;
-      if (isCompleted) c=-1;
-    
+    }catch(e){
+      clearInterval(progressInterval);
+    }
   }, INTERVAL_DELAY);
 
   
-  if (isCompleted){
-    clearInterval(progressInterval);
-  }
+
 
   YD.on("progress", async (progress) => {
     event.sender.send("progress", progress);
@@ -147,6 +148,7 @@ ipcMain.on("song_id", async (event, data) => {
     isCompleted = true;
     const NOTIFICATION_TITLE = "Download Done Successfully !! ";
     const NOTIFICATION_BODY = ` ${data.videoTitle} downloaded`;
+    mainWindow.setProgressBar(-1);
 
     showNotification(NOTIFICATION_TITLE, NOTIFICATION_BODY);
   });
