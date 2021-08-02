@@ -8,6 +8,7 @@
 electron-builder.yml
 
 dist
+packages
 ### Node ###
 # Logs
 logs

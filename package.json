@@ -1,6 +1,6 @@
 {
   "name": "zeus",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Music Downloader and Lyrics Generator",
   "main": "main.js",
   "author": "MedAziz11 & DaoudAnas13",
@@ -11,10 +11,19 @@
     "deploy": "electron-builder build --win --publish always"
   },
   "build": {
-    "asarUnpack": [
-      "**/Zeus/node_modules/ffmpeg-static-binaries-electron/*"
+    "appId": "com.electron.Zeus",
+    "productName": "Zeus",
+    "copyright": "Copyright © 2021 Zeus Inc",
+    "icon": "./src/assets/icon.ico",
+    "asar":false,
+    "extraResources": [
+      {
+        "from": "dist/node_modules/ffmpeg-static-electron/",
+        "to": "node_modules/ffmpeg-static-electron/*"
+      }
     ]
   },
+
   "repository": {
     "type": "git",
     "url": "https://github.com/MedAziz11/Zeus-.git"
